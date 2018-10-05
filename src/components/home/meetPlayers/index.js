@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
 import Stripes from '../../../Resources/images/stripes.png';
 import {Tag} from '../../ui/misc'; 
+import Reveal from 'react-reveal/Reveal';
+import HomeCards from './Cards';
 class MeetPlayers extends Component {
 
     state = {
-
+          show:false
     }
 
     render() {
         return (
-            <div className="home_meetplayers" style={{background:`#ffffff url(${Stripes})` }}>
+
+            <Reveal
+            fraction={0.7}
+             onReveal={()=>{
+                this.setState({show:true})
+             }}
+
+            >
+
+                 <div className="home_meetplayers" style={{background:`#ffffff url(${Stripes})` }}>
                 <div className="container">
                     <div className="home_meetplayers_wrapper">
                         <div className="home_card_wrapper">
-                         
+                         <HomeCards show={this.state.show}/>
                         </div>
                         <div className="home_text_wrapper">
                              <div>
@@ -21,7 +32,7 @@ class MeetPlayers extends Component {
                                    bck="#0e1731" 
                                    size="100px" 
                                    color="#ffffff"
-                                   style={{
+                                   add={{
                                        display:'inline-block',
                                        marginBottom:'20px'
                                    }}>MEET</Tag>
@@ -31,7 +42,7 @@ class MeetPlayers extends Component {
                                    bck="#0e1731" 
                                    size="100px" 
                                    color="#ffffff"
-                                   style={{
+                                   add={{
                                        display:'inline-block',
                                        marginBottom:'20px'
                                    }}>THE</Tag>
@@ -41,7 +52,7 @@ class MeetPlayers extends Component {
                                    bck="#0e1731" 
                                    size="100px" 
                                    color="#ffffff"
-                                   style={{
+                                   add={{
                                        display:'inline-block',
                                        marginBottom:'20px'
                                    }}>PLAYERS</Tag>
@@ -53,7 +64,7 @@ class MeetPlayers extends Component {
                                    color="#0e1731"
                                    link={true}
                                    linkTo="/team"
-                                   style={{
+                                   add={{
                                     display:'inline-block',
                                     marginBottom:'27px'
                                 }}
@@ -63,6 +74,8 @@ class MeetPlayers extends Component {
                     </div>
                 </div>
             </div>
+            </Reveal>
+            
         );
     }
 }
