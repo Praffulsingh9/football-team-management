@@ -47,5 +47,13 @@ export const firebaseLooper = (snapshot) => {
         return reversedArray;
     }
 
+export const validate = (element) => {
+      let error = [true,''];
 
+      if(element.validation.required){
+           const valid = element.valid.trim() !== '';
+           const message = `${!valid ? 'this field is required':""}`
+           error = !valid ? [valid,message]:error
+      }
+}
 
