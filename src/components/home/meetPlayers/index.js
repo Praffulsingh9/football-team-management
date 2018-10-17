@@ -61,7 +61,7 @@ class MeetPlayers extends Component {
                                         size="27px"
                                         color="#0e1731"
                                         link={true}
-                                        linkTo="/the_team"
+                                        linkto="/the_team"
                                         add={{
                                             display: 'inline-block',
                                             marginBottom: '27px',
