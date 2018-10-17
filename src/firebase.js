@@ -3,12 +3,12 @@ import 'firebase/app'
 import 'firebase/database'
 
 const config = {
-    apiKey: "AIzaSyDYiC4o4i1r3Hge4sdXEalB10KQ9rIWyQ0",
-    authDomain: "m-city-7874a.firebaseapp.com",
-    databaseURL: "https://m-city-7874a.firebaseio.com",
-    projectId: "m-city-7874a",
-    storageBucket: "m-city-7874a.appspot.com",
-    messagingSenderId: "669950819399"
+    apiKey: "AIzaSyDrp4nZIGWC4LLW7Hysuul2I7I9Be4JffE",
+    authDomain: "m-city-e891f.firebaseapp.com",
+    databaseURL: "https://m-city-e891f.firebaseio.com",
+    projectId: "m-city-e891f",
+    storageBucket: "m-city-e891f.appspot.com",
+    messagingSenderId: "896990184268"
   };
 
 firebase.initializeApp(config);
