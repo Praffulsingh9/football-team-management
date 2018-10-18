@@ -7,12 +7,14 @@ import SignIn from './components/signIn/index';
 
 import Dashboard from './components/admin/Dashboard';
 
+import PrivateRoute from './components/authRoutes/privateRoutes';
+
 const Routes = (props) => {
   return(
     <Layout>
         <Switch>
-
-            <Route exact component={Dashboard} path="/dashboard"/>
+            <PrivateRoute {...props} exact component={Dashboard} path="/dashboard"/>
+            
             <Route exact component={SignIn} path="/sign_in"/>          
             <Route exact component={Home} path="/"/>
             
