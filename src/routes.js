@@ -14,11 +14,14 @@ import AdminMatches from './components/admin/matches/Index';
 import AddEditMatch from './components/admin/matches/addEditMatch';
 
 import AdminPlayers from './components/admin/players/index';
+import AddEditPlayers from './components/admin/players/addEditPlayers';
 
 const Routes = (props) => {
   return(
     <Layout>
         <Switch>
+            <PrivateRoute {...props} exact component={AddEditPlayers} path="/admin_players/add_players"/>
+            <PrivateRoute {...props} exact component={AddEditPlayers} path="/admin_players/add_players/:id"/>
             <PrivateRoute {...props} exact component={AdminPlayers} path="/admin_players"/>
             <PrivateRoute {...props} exact component={AddEditMatch} path="/admin_matches/edit_match"/>
             <PrivateRoute {...props} exact component={AddEditMatch} path="/admin_matches/edit_match/:id"/>
