@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import AdminLayout from '../../../Hoc/AdminLayout';
+
 import FormField from '../../ui/formFields';
 import {validate} from '../../ui/misc';
+
 import {firebaseTeams,firebaseDB,firebaseMatches} from '../../../firebase';
 import {firebaseLooper} from '../../ui/misc';
+
 class AddEditMatch extends Component {
 
     state = {
@@ -44,7 +47,7 @@ class AddEditMatch extends Component {
                 },
                 valid: false,
                 validationMessage:'',
-                showLabel:false
+                showlabel:false
             },
             resultLocal:{
                 element:'input',
@@ -60,7 +63,7 @@ class AddEditMatch extends Component {
                 },
                 valid: false,
                 validationMessage:'',
-                showLabel:false
+                showlabel:false
             },
             away:{
                 element:'select',
@@ -77,7 +80,7 @@ class AddEditMatch extends Component {
                 },
                 valid: false,
                 validationMessage:'',
-                showLabel:false
+                showlabel:false
             },
             resultAway:{
                 element:'input',
@@ -93,7 +96,7 @@ class AddEditMatch extends Component {
                 },
                 valid: false,
                 validationMessage:'',
-                showLabel:false
+                showlabel:false
             },
             referee:{
                 element:'input',
@@ -203,7 +206,7 @@ class AddEditMatch extends Component {
 
             }
 
-            if(key === 'local' || 'away'){
+            if(key === 'local' || key === 'away'){
                 newFormdata[key].config.options = teamOptions;
             }
         }
@@ -236,7 +239,7 @@ class AddEditMatch extends Component {
 
 
         if(!matchId){
-
+            getTeams(false,'Add Match')
         } else {
             firebaseDB.ref( `matches/${matchId}`).once('value')
             .then((snapshot)=>{
@@ -290,7 +293,11 @@ class AddEditMatch extends Component {
                     this.setState({formError:true})
                 })
             } else {
-                // add match
+                firebaseMatches.push(dataToSubmit).then(()=>{
+                    this.props.history.push('/admin_matches')
+                }).catch(e=>{
+                    this.setState({formError:true})
+                })
             }
         } else {
             this.setState({
