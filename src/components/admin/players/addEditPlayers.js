@@ -5,6 +5,8 @@ import FormField from '../../ui/formFields';
 import {validate} from '../../ui/misc';
 
 import {firebasePlayers,firebaseDB,firebase} from '../../../firebase';
+import Fileuploader from '../../ui/fileUploader';
+
 
 
 class AddEditPlayers extends Component {
@@ -86,6 +88,14 @@ class AddEditPlayers extends Component {
                 validationMessage:'',
                 showLabel:true
             },
+            image:{
+                element:'image',
+                value:'',
+                validation:{
+                    required:true
+                },
+                valid:true
+            }
 
         }
     }
@@ -115,6 +125,8 @@ class AddEditPlayers extends Component {
             this.setState({
                 formType:'Add Player'
             })
+        } else {
+
         }
     }
 
@@ -141,6 +153,14 @@ class AddEditPlayers extends Component {
         }
     }
 
+    resetImage = () => {
+
+    }
+
+    storeFilename = () => {
+
+    }
+
 
 
     render() {
@@ -152,6 +172,16 @@ class AddEditPlayers extends Component {
                     </h2>
                     <div>
                         <form onSubmit={event=>this.submitForm(event)}>
+
+                        <Fileuploader
+                            dir="players"
+                            tag={"Player Image"}
+                            defaultImg={this.state.defaultImg}
+                            defaultImgName={this.state.formdata.image.value}
+                            resetImage={()=>this.resetImage()}
+                            filename={(filename)=>this.storeFilename(filename)}
+                        />
+
                         <FormField
                             id={'name'}
                             formdata={this.state.formdata.name}
