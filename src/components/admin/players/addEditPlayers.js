@@ -75,8 +75,8 @@ class AddEditPlayers extends Component {
                     label:'Select Position',
                     options:[
                         {key:"Keeper",value:"Keeper"},
-                        {key:"Defender",value:"Defender"},
-                        {key:"MidFielder",value:"MidFielder"},
+                        {key:"Defence",value:"Defence"},
+                        {key:"MidField",value:"MidField"},
                         {key:"Striker",value:"Striker"},
                     ]
                 },
@@ -123,6 +123,21 @@ class AddEditPlayers extends Component {
         })
     }
 
+    updateFields = (player, playerId, formType, defaultImg) => {
+        const newFormdata = {...this.state.formdata};
+
+        for(let key in newFormdata){
+            newFormdata[key].value = player[key];
+            newFormdata[key].valid = true
+        }
+        this.setState({
+            playerId,
+            defaultImg,
+            formType,
+            formdata:newFormdata
+        })
+    }
+
 
     componentDidMount(){
         const playerId = this.props.match.params.id;
@@ -131,8 +146,29 @@ class AddEditPlayers extends Component {
                 formType:'Add Player'
             })
         } else {
+            firebaseDB.ref(`players/${playerId}`).once('value')
+            .then((snapshot)=>{
+                const playerData = snapshot.val();
 
+                firebase.storage().ref('players')
+                .child(playerData.image).getDownloadURL()
+                .then(url=>{
+                    this.updateFields(playerData,playerId,'Edit Player',url)
+                }).catch( e =>{
+                    this.updateFields({...playerData,image:''},playerId,'Edit Player')
+                })
+            })
         }
+    }
+
+    successForm = (message) => {
+        this.setState({
+            formSuccess: message
+        })
+
+        setTimeout(()=>{
+            this.setState({formSuccess:''})
+        },2000)
     }
 
     submitForm(event){
@@ -150,6 +186,13 @@ class AddEditPlayers extends Component {
 
         if(formIsValid){
           if(this.state.formType === 'Edit Player'){
+            firebaseDB.ref(`players/${this.state.playerId}`)
+            .update(dataToSubmit)
+            .then(()=>{
+                this.successForm('Updated Correctly')
+            }).catch(e=>{
+                this.setState({formError:true})
+            })
 
           } else {
                 firebasePlayers.push(dataToSubmit).then(()=>{
