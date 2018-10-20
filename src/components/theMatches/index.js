@@ -36,8 +36,9 @@ class TheMatches extends Component {
                 <div className="the_matches_wrapper">
                     <div className="left">
                         <div className="match_filters"></div>
+                        <MatchesList matches={state.filterMatches}/>
                     </div>
-                    <MatchesList matches={state.filterMatches}/>
+                    
                     <div className="right">
                         <LeagueTable />
                     </div>
